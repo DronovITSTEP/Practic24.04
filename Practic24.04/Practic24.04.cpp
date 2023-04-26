@@ -187,6 +187,54 @@ void func_map() {
 	}
 }
 
+// multimap
+//template <class container>
+void show(map<string, int> col) {
+	for (map<string, int>::const_iterator i = col.begin(); i != col.end(); i++) {
+		cout << i->first << ": " << i->second << endl;
+	}
+	cout << endl;
+}
+void show(multimap<string, int> col) {
+	for (multimap<string, int>::const_iterator i = col.begin(); i != col.end(); i++) {
+		cout << i->first << ": " << i->second << endl;
+	}
+	cout << endl;
+}
+void func_multimap() {
+	map<string, int>cont;
+
+	cont.insert(pair<string, int>("Ivanov", 10));
+	cont.insert(pair<string, int>("Petrov", 20));
+
+	cont["Sidorov"] = 30;
+	show(cont);
+
+	cont["Ivanov"] = 50;
+	show(cont);
+
+	cont.insert(pair<string, int>("Ivanov", 60));
+	show(cont);
+	cout << "\n----------------------------------------------------\n";
+	multimap<string, int>multicont;
+	multicont.insert(pair<string, int>("Ivanov", 10));
+	multicont.insert(pair<string, int>("Ivanov", 50));
+	multicont.insert(pair<string, int>("Petrov", 20));
+	multicont.insert(pair<string, int>("Sidorov", 30));
+
+	//multicont["Sidorov"] = 40; - Error
+	show(multicont);
+	
+	multimap<string, int>::iterator iter = multicont.find("Petrov");
+	cout << iter->first << " " << iter->second << endl;
+
+	iter = multicont.lower_bound("Ivanov");
+	for (; iter != multicont.upper_bound("Ivanov"); iter++) {
+		cout << iter->first << ": " << iter->second << endl;
+	}
+	cout << endl;
+}
+
 int main()
 {
 	/*int x = 10;
@@ -241,5 +289,6 @@ int main()
 	delete[]ptr;*/
 	//func_vector();
 	//func_list();
-	func_map();
+	//func_map();
+	func_multimap();
 }
